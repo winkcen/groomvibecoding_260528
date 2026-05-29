@@ -67,8 +67,8 @@ export const WeatherTimeline: React.FC = () => {
         </h2>
       </div>
 
-      {/* Grid for desktop, auto-scroll for mobile */}
-      <div className="grid grid-cols-7 gap-2 md:gap-3 overflow-x-auto no-scrollbar py-2 -mx-4 px-4 md:mx-0 md:px-0">
+      {/* Flex scroll for mobile, Grid for desktop */}
+      <div className="flex md:grid md:grid-cols-7 gap-2 md:gap-3 overflow-x-auto md:overflow-x-visible no-scrollbar py-2 -mx-4 px-4 md:mx-0 md:px-0">
         {weatherData.daily.slice(0, 7).map((day: DailyForecast, index: number) => {
           const isActive = index === activeDayIndex;
           const isWeekend = day.dayOfWeek === '토' || day.dayOfWeek === '일';
@@ -77,7 +77,7 @@ export const WeatherTimeline: React.FC = () => {
             <button
               key={day.date}
               onClick={() => setActiveDayIndex(index)}
-              className={`flex flex-col items-center justify-between p-3 rounded-2xl border text-center transition-all min-w-[75px] md:min-w-0 cursor-pointer ${getCardBg(
+              className={`flex-shrink-0 w-[78px] md:w-auto flex flex-col items-center justify-between p-3 rounded-2xl border text-center transition-all cursor-pointer ${getCardBg(
                 day.condition,
                 isActive
               )} ${isActive ? 'scale-102 -translate-y-0.5' : 'active:scale-95'}`}
